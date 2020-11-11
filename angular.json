@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "todo-list-angular-firebase"
+    }
+  },
+  "defaultProject": "todo-list-angular-firebase",
+  "cli": {
+    "analytics": "887b1cc9-942c-4a9f-938f-cee27593bfc1"
+  }
 }
