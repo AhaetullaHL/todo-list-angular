@@ -56,22 +56,27 @@ export class TodoService {
   constructor(private categoryService: CategoryService) {
   }
 
+  //get todos
   getTodos(){
     return this.todos;
   }
 
+  //get specific todo
   getTodo(i){
     return this.todos[i];
   }
 
+  //add todo
   addTodo(todo){
     this.todos.push(todo);
   }
 
+  //delete todo
   deleteTodo(i){
     this.todos.splice(i, 1);
   }
 
+  //edit todo
   editTodo(value, i){
     this.todos[i] = value;
   }
