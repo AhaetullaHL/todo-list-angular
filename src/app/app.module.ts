@@ -11,6 +11,7 @@ import { NavComponent } from './components/templates/nav/nav.component';
 import { GroupComponent } from './components/templates/group/group.component';
 import { CardComponent } from './components/templates/card/card.component';
 import { FormComponent } from './components/templates/form/form.component';
+import { CategoryComponent } from './components/templates/category/category.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormComponent } from './components/templates/form/form.component';
     NavComponent,
     GroupComponent,
     CardComponent,
-    FormComponent
+    FormComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
