@@ -19,7 +19,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'todo-list/:id',
+    path: 'table/:id',
     component: TodoListComponent
   },
 ];
