@@ -3,18 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './components/home/home.component';
-import { TodoListComponent } from './todo-list/todo-list.component';
+import {LoginComponent} from "./components/auth/login/login.component";
+import {RegisterComponent} from "./components/auth/register/register.component";
+import {TodoListComponent} from "./components/todo-list/todo-list.component";
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
     TodoListComponent
+
   ],
   imports: [
     BrowserModule,
