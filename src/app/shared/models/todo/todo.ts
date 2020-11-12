@@ -7,6 +7,5 @@ export class Todo {
   label: string;
   desc: string;
   percent_done: number;
-  group: Group;
   categories: Category[];
 }
