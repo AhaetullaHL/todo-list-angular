@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  tables: Table[] = this.tableService.getTables();
+  tables: Table[];
 
   constructor(private tableService: TableService, private authService: AuthService, private router: Router) {
     authService.verify(success => {
@@ -19,17 +19,13 @@ export class HomeComponent implements OnInit {
         this.router.navigateByUrl('/login');
       }
     });
+    tableService.getContent(1,  tables => {
+      console.log(tables);
+    });
   }
 
   ngOnInit(): void {
   }
 
-  deleteTable(i){
-    this.tableService.deleteTable(i);
-  }
-
-  addTable(table?){
-    this.tableService.addTable(table);
-  }
 
 }

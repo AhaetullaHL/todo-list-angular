@@ -1,77 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Table } from "../../models/table/table";
-import { GroupService } from "../group/group.service";
-import { environment as env } from "../../../../environments/environment";
-import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { GroupService } from '../group/group.service';
+import { RequestService } from '../request/request.service';
+import { Table } from '../../models/table/table';
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TableService {
 
-  tables: Table[] = [
-    new Table({
-      id: 1,
-      label: 'table 1',
-      groups: [
-        this.groupService.getGroup(0),
-        this.groupService.getGroup(1),
-        this.groupService.getGroup(2),
-      ],
-    }),
-    new Table({
-      id: 2,
-      label: 'table 2',
-      groups: [
-        this.groupService.getGroup(1),
-      ],
-    }),
 
-  ];
+  constructor(private groupService: GroupService, private requestService: RequestService, private router: Router) { }
 
-  constructor(private groupService: GroupService, private http: HttpClient) { }
-
-  // get tables
-  getTables(){
-    return this.tables;
+  getAll(callback: (tables: Table[]) => void): void{
+    this.requestService.get<Table[]>('tables', {}, true, data => {
+      callback(data);
+    });
   }
 
-  //get table
-  getTable(i){
-    return this.tables[i];
+  add(label: string, callback: (tables: Table[]) => void): void{
+    this.requestService.post<Table>('tables', {}, {label}, true, data => {
+      callback(data);
+    });
   }
 
-  //add table
-  addTable(table){
-    this.tables.push(table);
+  getContent(id: number, callback: (tables: Table[]) => void): void{
+    this.requestService.get<Table[]>(`tables/getContent/${id}`, {}, true, data => {
+      callback(data);
+    });
   }
 
-  //delete table
-  deleteTable(i){
-    this.tables.splice(i,1);
+  get(id: number, callback: (tables: Table) => void): void{
+    this.requestService.get<Table>(`tables/${id}`, {}, true, data => {
+      callback(data);
+    });
   }
 
-  //edit table
-  editTable(value, i){
-    this.tables[i] = value;
+  edit(id: number, label: string, callback: (tables: Table) => void): void{
+    this.requestService.put(`tables/${id}`, {}, {label}, true, data => {
+      callback(data);
+    });
   }
 
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-      // TODO: better job of transforming error for user consumption
-      console.log(`${operation} failed: ${error.message}`);
-      // Let the app keep running by returning an empty result.
-      return (error);
-    };
+  delete(id: number, callback: (tables: Table) => void): void{
+    this.requestService.delete(`tables/${id}`, {}, true, data => {
+      callback(data);
+    });
   }
-
 }
