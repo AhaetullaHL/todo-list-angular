@@ -10,10 +10,10 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { NavComponent } from './components/templates/nav/nav.component';
 import { GroupComponent } from './components/templates/group/group.component';
 import { CardComponent } from './components/templates/card/card.component';
-import { FormComponent } from './components/templates/form/form.component';
 import { CategoryComponent } from './components/templates/category/category.component';
 
 import {HttpClientModule} from '@angular/common/http';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,13 +25,13 @@ import {HttpClientModule} from '@angular/common/http';
     NavComponent,
     GroupComponent,
     CardComponent,
-    FormComponent,
     CategoryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
