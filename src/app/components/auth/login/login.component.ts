@@ -26,13 +26,11 @@ export class LoginComponent {
     const val = this.form.value;
 
     if (val.email && val.password) {
-      this.authService.login(val.email, val.password)
-        .subscribe(
-          () => {
-            console.log('User is logged in');
-            this.router.navigateByUrl('/');
-          }
-        );
+      this.authService.login(val.email, val.password, (success) => {
+        if (success){
+          this.router.navigateByUrl('/');
+        }
+      });
     }
   }
 

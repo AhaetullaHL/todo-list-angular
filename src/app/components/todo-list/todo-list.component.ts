@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {TableService} from "../../shared/services/table/table.service";
+import {AuthService} from "../../shared/services/auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-todo-list',
@@ -7,8 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoListComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private authService: AuthService, private router: Router) {
+    authService.verify(success => {
+      if (!success){
+        this.router.navigateByUrl('/login');
+      }
+    });
+  }
   ngOnInit(): void {
   }
 

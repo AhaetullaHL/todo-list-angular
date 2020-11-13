@@ -1,17 +1,18 @@
 <form [formGroup]="form">
   <fieldset>
     <legend>Login</legend>
-    <div class="form-field">
+    <div class="">
       <label>Email:</label>
       <input name="email" formControlName="email">
     </div>
-    <div class="form-field">
+    <div class="">
       <label>Password:</label>
       <input name="password" formControlName="password"
              type="password">
     </div>
   </fieldset>
-  <div class="form-buttons">
-    <button class="button button-primary" (click)="login()">Login</button>
+  <div class="">
+    <button class="" (click)="login()">Login</button>
+    no account? <a [routerLink]="['/register']">Register</a>
   </div>
 </form>
