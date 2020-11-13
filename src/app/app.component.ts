@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService} from './shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  constructor(private authService: AuthService) {
+    authService.login('test@test.com', 'password').subscribe(data => {
+      console.log(data);
+    });
+  }
   title = 'todo-list-angular-firebase';
 }

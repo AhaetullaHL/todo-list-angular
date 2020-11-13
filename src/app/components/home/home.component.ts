@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TableService } from "../../shared/services/table.service";
+import { TableService } from "../../shared/services/table/table.service";
 import {Table} from "../../shared/models/table/table";
 
 @Component({

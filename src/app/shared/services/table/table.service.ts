@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Table } from "../models/table/table";
-import { GroupService } from "./group.service";
+import { Table } from "../../models/table/table";
+import { GroupService } from "../group/group.service";
 
 @Injectable({
   providedIn: 'root'

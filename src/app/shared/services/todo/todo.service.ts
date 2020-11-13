@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Todo } from '../models/todo/todo';
-import { CategoryService } from "./category.service";
+import { Todo } from '../../models/todo/todo';
+import { CategoryService } from "../category/category.service";
 
 @Injectable({
   providedIn: 'root'

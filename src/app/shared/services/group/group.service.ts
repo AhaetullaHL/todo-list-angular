@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { TodoService } from "./todo.service";
-import { Group } from "../models/group/group";
+import { TodoService } from "../todo/todo.service";
+import { Group } from "../../models/group/group";
 
 @Injectable({
   providedIn: 'root'
