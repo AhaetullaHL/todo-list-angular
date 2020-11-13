@@ -11,15 +11,23 @@ import {Router} from '@angular/router';
 export class LoginComponent {
 
   form: FormGroup;
+  email: string;
+  password: string;
+  error: string;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private router: Router) {
-
+    authService.verify(success => {
+      if (success){
+        this.router.navigateByUrl('/');
+      }
+    });
     this.form = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.error = 'notFilled';
   }
 
   login(): void {
@@ -29,8 +37,12 @@ export class LoginComponent {
       this.authService.login(val.email, val.password, (success) => {
         if (success){
           this.router.navigateByUrl('/');
+        } else {
+          this.error = 'invalidCredentials';
         }
       });
+    } else {
+      this.error = 'notFilled';
     }
   }
 

@@ -1,18 +1,18 @@
 <form [formGroup]="form">
-  <fieldset>
-    <legend>Login</legend>
-    <div class="">
-      <label>Email:</label>
-      <input name="email" formControlName="email">
-    </div>
-    <div class="">
-      <label>Password:</label>
-      <input name="password" formControlName="password"
-             type="password">
-    </div>
-  </fieldset>
-  <div class="">
-    <button class="" (click)="login()">Login</button>
-    no account? <a [routerLink]="['/register']">Register</a>
+  <h1>Se connecter</h1>
+  <small *ngIf="error=='invalidCredentials'">Email ou mot de passe incorrect(s)</small>
+  <small *ngIf="error=='notFilled'">Veuillez remplir les champs</small>
+  <div class="md-input">
+    <input id="email" name="email" formControlName="email" [(ngModel)]="email" [class.active]="email">
+    <label for="email">Email</label>
+  </div>
+  <div class="md-input">
+    <input id="password" name="password" formControlName="password" type="password"  [(ngModel)]="password" [class.active]="password">
+    <label for="password">Mot de passe</label>
+  </div>
+
+  <div class="auth-controls">
+    <button class="" (click)="login()">Se connecter</button>
+    <div class="question">pas de compte? <a [routerLink]="['/register']">S'inscrire</a></div>
   </div>
 </form>

@@ -1,0 +1,26 @@
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 35px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #2962FF;
+  padding: 0 24px;
+  & .brand {
+    margin: 0 12px 0 32px;
+    font-size: 20px;
+  }
+  & .link{
+    color: #2962FF;
+    margin: 0 12px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+.separator{
+  height: 35px;
+}

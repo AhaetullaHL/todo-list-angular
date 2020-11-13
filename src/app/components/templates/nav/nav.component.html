@@ -1,4 +1,10 @@
 <nav>
-  <text class="brand">Todo-List</text>
-  <a class="link" (click)="logout()">logout</a>
+  <div class="right">
+    <text class="brand">Todo-List</text>
+    <a class="link" [routerLink]="['/']">home</a>
+  </div>
+  <div class="left">
+    <a class="link" (click)="logout()">logout</a>
+  </div>
 </nav>
+<div class="separator"></div>

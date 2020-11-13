@@ -25,7 +25,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     NavComponent,
     GroupComponent,
     CardComponent,
-    CategoryComponent
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,

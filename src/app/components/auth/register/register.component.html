@@ -1,23 +1,23 @@
 <form [formGroup]="form">
-  <fieldset>
-    <legend>Login</legend>
-    <div class="form-field">
-      <label>Name:</label>
-      <input name="name" formControlName="name">
-    </div>
-    <div class="form-field">
-      <label>Email:</label>
-      <input name="email" formControlName="email">
-    </div>
-    <div class="form-field">
-      <label>Password:</label>
-      <input name="password" formControlName="password"
-             type="password">
-    </div>
-  </fieldset>
-  <div class="form-buttons">
-    <button class="button button-primary" (click)="register()">Register</button>
-    have account? <a [routerLink]="['/login']">Login</a>
+  <h1>S'inscrire</h1>
+  <small *ngIf="error=='error'">Impossible de créer le compte, l'Email est peut-etre déja utilisé.</small>
+  <small *ngIf="error=='notFilled'">Veuillez remplir les champs</small>
+  <div class="md-input">
+    <input id="name" name="name" formControlName="name" [(ngModel)]="name" [class.active]="name">
+    <label for="name">Nom d'utilisateur</label>
+  </div>
+  <div class="md-input">
+    <input id="email" name="email" formControlName="email" [(ngModel)]="email" [class.active]="email">
+    <label for="email">Email</label>
+  </div>
+  <div class="md-input">
+    <input id="password" name="password" formControlName="password" type="password"  [(ngModel)]="password" [class.active]="password">
+    <label for="password">Mot de passe</label>
+  </div>
+
+  <div class="auth-controls">
+    <button class="" (click)="register()">S'inscrire</button>
+    <div class="question">déjà inscrit? <a [routerLink]="['/login']">Se connecter</a></div>
   </div>
 </form>
 

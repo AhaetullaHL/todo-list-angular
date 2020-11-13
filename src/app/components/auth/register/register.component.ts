@@ -12,16 +12,25 @@ import {Router} from '@angular/router';
 export class RegisterComponent {
 
   form: FormGroup;
+  name: string;
+  email: string;
+  password: string;
+  error: string;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private router: Router) {
-
+    authService.verify(success => {
+      if (success){
+        this.router.navigateByUrl('/');
+      }
+    });
     this.form = this.fb.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.error = 'notFilled';
   }
 
   register(): void {
@@ -31,8 +40,12 @@ export class RegisterComponent {
       this.authService.register(val.name, val.email, val.password, (success) => {
         if (success){
           this.router.navigateByUrl('/');
+        } else {
+          this.error = 'error';
         }
       });
+    } else {
+      this.error = 'notFilled';
     }
   }
 }
