@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaderResponse, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 
 import {tap, catchError, map} from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,17 +16,81 @@ export class AuthService {
     this.apiUrl = environment.api_url;
   }
 
-  login(email: string, password: string): Observable<any>{
-    const headers = new Headers({
+  login(email: string, password: string, callback?: (logged: boolean) => void): void{
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-
     // Authorization: `Bearer ${auth_token}`
 
-    return this.http.post<Observable<any>>(this.apiUrl + 'login', {headers, email, password}).pipe(
+    this.http.post<{ token: string }>(this.apiUrl + 'login', {headers, email, password}).pipe(
       tap(data => data),
-      catchError(this.handleError('getBeers', []))
-    );
+      catchError(this.handleError('login', null))
+    ).subscribe(data => {
+      if ('token' in data){
+        localStorage.setItem('token', data.token);
+        callback(true);
+      }else{
+        callback(false);
+      }
+    });
+  }
+
+  register(name: string, email: string, password: string, callback?: (logged: boolean) => void): void{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    // Authorization: `Bearer ${auth_token}`
+
+    this.http.post<{ token: string }|{ message: string }>(this.apiUrl + 'register', {headers, name, email, password}).pipe(
+      tap(data => data),
+      catchError(this.handleError('register', null))
+    ).subscribe(data => {
+      if ('token' in data){
+        localStorage.setItem('token', data.token);
+        callback(true);
+      }else{
+        callback(false);
+      }
+    });
+  }
+
+  logout( callback?: (success: boolean) => void ): void{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    // Authorization: `Bearer ${auth_token}`
+    if (!localStorage.getItem('token')){
+      callback(true);
+      return;
+    }
+    this.http.post<Observable<any>>(this.apiUrl + 'logout', {headers, token: localStorage.getItem('token')}).pipe(
+      tap(data => data),
+      catchError(this.handleError('logout', null))
+    ).subscribe(data => {
+        localStorage.removeItem('token');
+        callback(true);
+    });
+  }
+
+  verify( callback?: (valid: boolean) => void ): void{
+    if (!localStorage.getItem('token')){
+      callback(false);
+      return;
+    }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    this.http.get<{ message: string }>(this.apiUrl + 'verify', {headers}).pipe(
+      tap(data => data[0]),
+      catchError(this.handleError('verify', 'invalid'))
+    ).subscribe(data => {
+      if (data.message && data.message === 'valid'){
+        callback(true);
+      }else{
+        callback(false);
+      }
+    });
   }
 
   /**
@@ -36,14 +100,11 @@ export class AuthService {
    * @param result - optional value to return as the observable result
    */
   // tslint:disable-next-line:typedef
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-      // TODO: better job of transforming error for user consumption
+  private handleError<T>(operation = 'operation', result?: string) {
+    return (error: any): Observable<{message: string}> => {
       console.log(`${operation} failed: ${error.message}`);
       // Let the app keep running by returning an empty result.
-      return (error);
+      return (of({message: result}));
     };
   }
 }

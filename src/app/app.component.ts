@@ -8,9 +8,10 @@ import {AuthService} from './shared/services/auth/auth.service';
 })
 export class AppComponent {
   constructor(private authService: AuthService) {
-    authService.login('test@test.com', 'password').subscribe(data => {
-      console.log(data);
-    });
+    // authService.register('test2', 'test2@test.com', 'password', data => console.log(data));
+    // authService.login('test2@test.com', 'password', data => console.log(data));
+    // authService.verify(data => console.log(data));
+    // authService.logout(data => console.log(data));
   }
   title = 'todo-list-angular-firebase';
 }
