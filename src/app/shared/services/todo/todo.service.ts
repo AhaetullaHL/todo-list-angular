@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../../models/todo/todo';
 import { CategoryService } from "../category/category.service";
-import { environment as env } from "../../../../environments/environment";
-import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import {RequestService} from "../request/request.service";
 import {Table} from "../../models/table/table";
