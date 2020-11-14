@@ -2,9 +2,9 @@
 <h1>Tables</h1>
 <!-- TODO: Add loop for all tables in list -->
 <ul>
-  <li *ngFor="let table of tables; let i = index">
+  <li *ngFor="let table of tables">
     <a [routerLink]="['/table', table.id]">{{ table.label }}</a>
-    <button (click)="deleteTable(i)"> - </button>
+    <button (click)="deleteTable(table.id)"> - </button>
   </li>
   <li>
     <!-- TODO: update link -->

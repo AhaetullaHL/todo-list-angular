@@ -19,12 +19,19 @@ export class HomeComponent implements OnInit {
         this.router.navigateByUrl('/login');
       }
     });
-    tableService.getContent(1,  tables => {
-      console.log(tables);
-    });
   }
 
   ngOnInit(): void {
+    this.tableService.getAll(  tables => {
+      this.tables = tables;
+      console.log(this.tables);
+    });
+  }
+
+  deleteTable(id){
+    // @ts-ignore
+    this.tableService.delete(id);
+    this.ngOnInit();
   }
 
 

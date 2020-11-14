@@ -44,7 +44,7 @@ export class TableService {
 
   delete(id: number, callback: (tables: Table) => void): void{
     this.requestService.delete(`tables/${id}`, {}, true, data => {
-      callback(data);
+      data;
     });
   }
 }
