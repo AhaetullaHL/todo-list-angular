@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { GroupService } from '../group/group.service';
 import { RequestService } from '../request/request.service';
 import { Table } from '../../models/table/table';
-import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import {Router} from "@angular/router";
 export class TableService {
 
 
-  constructor(private groupService: GroupService, private requestService: RequestService, private router: Router) { }
+  constructor(private groupService: GroupService, private requestService: RequestService) { }
 
   getAll(callback: (tables: Table[]) => void): void{
     this.requestService.get<Table[]>('tables', {}, true, data => {
